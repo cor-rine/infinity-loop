@@ -28,7 +28,11 @@ var TileTypes = {
   pegCircle: {
     classNames: 'tile peg-circle js-tile',
     svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="-13.25 -13.25 72 72"    overflow="visible" enable-background="new -13.25 -13.25 72 72" xml:space="preserve"> <defs> </defs><circle fill="none" cx="22.5" cy="22.5" r="9"/> <path d="M58.75,13.75H43.234C39.821,5.67,31.822,0,22.5,0C10.074,0,0,10.074,0,22.5C0,34.926,10.074,45,22.5,45  c9.128,0,16.98-5.439,20.51-13.25h15.74V13.75z M22.5,31.5c-4.971,0-9-4.029-9-9s4.029-9,9-9s9,4.029,9,9S27.471,31.5,22.5,31.5z"/></svg>'
-  }
+  },
+  blank: {
+    classNames: 'tile straight-line js-tile',
+    svgTemplate: ''
+  },
 };
 
 /**
@@ -140,7 +144,7 @@ Board.prototype = {
       }
     }
     
-    board.style.width = CSSValues.tileWidth * self.tiles.length + 'px';
+    board.style.width = CSSValues.tileWidth * self.tiles[0].length + 'px';
 
     board.addEventListener('click', function() {
       if (self.isWinningMove()) {
@@ -302,6 +306,23 @@ getJSON = function(url, callback) {
   request.send();
 }
 
+/**
+ * Query parameters function 
+ *
+ */
+ getQueryParams = function() {
+    var str = window.location.search;
+    var objURL = {};
+
+    str.replace(
+      new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+      function( $0, $1, $2, $3 ){
+        objURL[ $1 ] = $3;
+      }
+    );
+    return objURL;
+  };
+
 
 /**
  * Onload start the game and build the level
@@ -310,12 +331,29 @@ getJSON = function(url, callback) {
 window.onload = function() {
 
   // Set debug mode for level building
-  if (document.location.search.substring(1) === 'debug=true') {
+  var queryParams = getQueryParams();
+
+  // Debug Mode
+  if (queryParams['debug']) {
     LevelBuilder.debug = true;
+
+    if (queryParams['level']) {
+
+      var level = parseInt(queryParams['level']);
+
+      getJSON('//' + document.location.host + '/js/levels/' + level + '.json', function(data) {
+        LevelBuilder.init('.js-board', data.level);
+      });
+
+    }
   }
 
-  getJSON('//' + document.location.host + '/js/levels/4.json', function(data) {
-    LevelBuilder.init('.js-board', data.level);
-  });
+  // Game Mode
+  // Not finished yet ...
+  else {
+    getJSON('//' + document.location.host + '/js/levels/5.json', function(data) {
+      LevelBuilder.init('.js-board', data.level);
+    });
+  }
 
 };
