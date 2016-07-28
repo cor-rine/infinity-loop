@@ -11,23 +11,23 @@ var CSSValues = {
 var TileTypes = {
   straightLine: {
     classNames: 'tile straight-line js-tile',
-    svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="72px" height="72px" viewBox="0 -27 72 72" overflow="visible" enable-background="new 0 -27 72 72" xml:space="preserve"> <defs></defs><rect width="72" height="18"/></svg>'
+    svgTemplate: '<embed src="svg/straight-line.svg" type="image/svg+xml"></embed>'
   },
   semiCircle: {
     classNames: 'tile semi-circle js-tile',
-    svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 0 72 72" overflow="visible" enable-background="new 0 0 72 72" xml:space="preserve"><defs></defs><path d="M45,0c0,0-9,0-18,0C27,27,0,27,0,27v18c0,0,23.101-0.003,36.2-16.557C42.616,37.397,53.506,45,72,45c0,0,0-9,0-18 C45,27,45,0,45,0z"/></svg>'
+    svgTemplate: '<embed src="svg/semi-circle.svg" type="image/svg+xml"></embed>'
   },
   quarterCircle: {
     classNames: 'tile quarter-circle js-tile',
-    svgTemplate: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 -27 72 72" overflow="visible" enable-background="new 0 -27 72 72" xml:space="preserve"> <defs> </defs> <path d="M0,0c45,0,45,45,45,45H27c0,0,0-27-27-27C0,9,0,0,0,0z"/> </svg>'
+    svgTemplate: '<embed src="svg/quarter-circle.svg" type="image/svg+xml"></embed>'
   },
   fullCircle: {
     classNames: 'tile full-circle js-tile',
-    svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 0 72 72" overflow="visible" enable-background="new 0 0 72 72"   xml:space="preserve"><defs></defs><path fill="none" d="M36.2,28.443c-2.331,2.946-4.978,5.366-7.756,7.357c2.946,2.331,5.366,4.978,7.357,7.756  c2.331-2.945,4.978-5.366,7.756-7.357C40.611,33.869,38.19,31.222,36.2,28.443z"/><path d="M45,0c0,0-9,0-18,0C27,27,0,27,0,27v18c27,0,27,27,27,27s9,0,18,0c0-27,27-27,27-27s0-9,0-18C45,27,45,0,45,0z M35.8,43.557  c-1.991-2.778-4.411-5.426-7.357-7.756c2.778-1.991,5.425-4.411,7.756-7.357c1.991,2.778,4.412,5.425,7.357,7.756  C40.778,38.19,38.131,40.611,35.8,43.557z"/></svg>'
+    svgTemplate: '<embed src="svg/full-circle.svg" type="image/svg+xml"></embed>'
   },
   pegCircle: {
     classNames: 'tile peg-circle js-tile',
-    svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="-13.25 -13.25 72 72"    overflow="visible" enable-background="new -13.25 -13.25 72 72" xml:space="preserve"> <defs> </defs><circle fill="none" cx="22.5" cy="22.5" r="9"/> <path d="M58.75,13.75H43.234C39.821,5.67,31.822,0,22.5,0C10.074,0,0,10.074,0,22.5C0,34.926,10.074,45,22.5,45  c9.128,0,16.98-5.439,20.51-13.25h15.74V13.75z M22.5,31.5c-4.971,0-9-4.029-9-9s4.029-9,9-9s9,4.029,9,9S27.471,31.5,22.5,31.5z"/></svg>'
+    svgTemplate: '<embed src="svg/peg-circle.svg" type="image/svg+xml"></embed>'
   }
 };
 
