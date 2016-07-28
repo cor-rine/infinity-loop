@@ -350,8 +350,8 @@ window.onload = function() {
 
   // Game Mode
   // Not finished yet ...
-  else {
-    getJSON('//' + document.location.host + '/js/levels/5.json', function(data) {
+  if (!queryParams['level']) {
+    getJSON('//' + document.location.host + '/js/levels/1.json', function(data) {
       LevelBuilder.init('.js-board', data.level);
     });
   }
