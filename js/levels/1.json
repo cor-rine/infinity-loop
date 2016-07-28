@@ -1,0 +1,7 @@
+{
+  "name" : "Level 1",
+  "level" : [
+    [ {"tile": "pegCircle", "rotation": 0}, {"tile": "pegCircle", "rotation": 0}],
+    
+    [{"tile": "pegCircle", "rotation": 0}, {"tile": "pegCircle", "rotation": 180}] ]
+}

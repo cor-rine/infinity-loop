@@ -1,0 +1,9 @@
+{
+  "name" : "Level 2",
+  "level" : [
+    [ {"tile": "pegCircle", "rotation": 0}, {"tile": "straightLine", "rotation": 0}, {"tile": "pegCircle", "rotation": 0}],
+    
+    [{"tile": "pegCircle", "rotation": 90}, {"tile": "straightLine", "rotation": 90}, {"tile": "pegCircle", "rotation": 0}],
+    
+    [{"tile": "pegCircle", "rotation": 0}, {"tile": "straightLine", "rotation": 0}, {"tile": "pegCircle", "rotation": 180}] ]
+}
