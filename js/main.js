@@ -1,7 +1,13 @@
+/**
+ * CSS Settings that need to come into the JS
+ */
 var CSSValues = {
   tileWidth: 72
 }
 
+/**
+ * Tile Types and templates
+ */
 var TileTypes = {
   straightLine: {
     classNames: 'tile straight-line js-tile',
@@ -25,6 +31,9 @@ var TileTypes = {
   }
 };
 
+/**
+ * Level Builder to create the levels and control what happens on the board
+ */
 var LevelBuilder = {
   board: null,
   
@@ -50,6 +59,7 @@ var LevelBuilder = {
     _this.board.renderBoard();
   }
 };
+
 
 /**
  * Initialise the Board for the obstacle.
@@ -261,13 +271,16 @@ Tile.prototype = {
 }
 
 
+/**
+ * Placeholder getJSON to get the levels from the json files
+ * Not sure if I want to keep this here or not
+ */
 getJSON = function(url, callback) {
   var request = new XMLHttpRequest();
   request.open('GET', url, true);
 
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
-      // Success!
       var data = JSON.parse(request.responseText);
 
       callback(data);
@@ -286,6 +299,10 @@ getJSON = function(url, callback) {
 }
 
 
+/**
+ * Onload start the game and build the level
+ * Need to build a level around this to keep score maybeee ... we'll see.
+ */
 window.onload = function() {
 
   getJSON(document.location + 'js/levels/2.json', function(data) {
