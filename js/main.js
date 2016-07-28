@@ -38,15 +38,16 @@ var LevelBuilder = {
     // Iterate over the level and create the board in the DOM
     for (var i = 0; i < level.length; i++) {
       for (var j = 0; j < level[i].length; j++) {
-        _this.board.setTile(i, j, new Tile(level[i][j].tile, TileTypes[level[i][j].tile], level[i][j].rotation));
+
+        // Set the board up with a random rotation of the tile
+        _this.board.setTile(i, j, new Tile(level[i][j].tile, TileTypes[level[i][j].tile], Math.ceil(Math.random()*4)*90));
+
+        // Set the solution
+        _this.board.setSolutionTile(i, j, level[i][j].rotation);
       }
     }
 
     _this.board.renderBoard();
-  },
-
-  setSolution: function(solution) {
-    this.board.addSolution(solution);
   }
 };
 
@@ -72,12 +73,24 @@ Board.prototype = {
    **/
   generateBoardMap: function() {
     this.tiles = Array(this.width);
+    this.solution = Array(this.width);
 
     for (var i = 0; i < this.width; i++) {
       for (var j = 0; j < this.height; j++) {
         this.tiles[i] = Array(this.height);
+        this.solution[i] = Array(this.height);
       }
     }
+  },
+
+  /**
+   * Initialise the DOM for the obstacle.
+   * @param {number} xVal
+   * @param {number} yVal
+   * @param {number} rotation to set at that tile value
+   */
+  setSolutionTile: function(xVal, yVal, rotation) {
+    this.solution[xVal][yVal] = rotation;
   },
 
   /**
@@ -97,13 +110,6 @@ Board.prototype = {
    */
   getTile: function(xVal, yVal) {
     return this.tiles[xVal][yVal];
-  },
-
-  /**
-   * Add the solution to the board
-   */
-  addSolution: function(solution) {
-    this.solution = solution;
   },
 
   /**
@@ -142,8 +148,8 @@ Board.prototype = {
       for (var j = 0; j < _this.tiles[i].length; j++) {
         var tile = _this.getTile(i, j);
 
-        // console.log('Solution: ' + _this.solution[i][j]);
-        // console.log('Tile: ' + tile.rotation%360);
+        console.log('Solution: ' + _this.solution[i][j]);
+        console.log('Tile: ' + tile.rotation%360);
 
         if (typeof _this.solution[i][j] === 'object') {
           if (_this.solution[i][j][0] !== tile.rotation%360 ||
@@ -282,12 +288,8 @@ getJSON = function(url, callback) {
 
 window.onload = function() {
 
-  getJSON(document.location + 'js/levels/1.json', function(data) {
+  getJSON(document.location + 'js/levels/2.json', function(data) {
     LevelBuilder.init('.js-board', data.level);
-  });
-
-  getJSON(document.location + 'js/solutions/1.json', function(data) {
-    LevelBuilder.setSolution(data.map);
   });
 
 };
