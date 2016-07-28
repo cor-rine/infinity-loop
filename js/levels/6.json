@@ -1,9 +1,9 @@
 {
   "name" : "Level 6",
   "level" : [
-    [ {"tile": "pegCircle", "rotation": 0}, {"tile": "semiCircle", "rotation": 180}, {"tile": "quarterCircle", "rotation": 0}, {"tile": "pegCircle", "rotation": 90}],
+    [ {"tile": "pegCircle", "rotation": 90}, {"tile": "quarterCircle", "rotation": 270}, {"tile": "quarterCircle", "rotation": 0}, {"tile": "pegCircle", "rotation": 90}],
     
-    [{"tile": "quarterCircle", "rotation": 270}, {"tile": "fullCircle", "rotation": 0}, {"tile": "semiCircle", "rotation": 270}, {"tile": "straightLine", "rotation": 90}],
+    [{"tile": "straightLine", "rotation": 90}, {"tile": "fullCircle", "rotation": 0}, {"tile": "semiCircle", "rotation": 270}, {"tile": "straightLine", "rotation": 90}],
     
     [{"tile": "straightLine", "rotation": 90}, {"tile": "quarterCircle", "rotation": 180}, {"tile": "semiCircle", "rotation": 0}, {"tile": "quarterCircle", "rotation": 90}],
 

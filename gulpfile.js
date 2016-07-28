@@ -12,7 +12,7 @@ gulp.task('serve', function() {
       baseDir: "./"
     }
   });
-  gulp.watch("./**/*.*", browserSync.reload);
+  gulp.watch("**/*.*", browserSync.reload);
 
 });
 
