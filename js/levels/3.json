@@ -1,0 +1,9 @@
+{
+  "name" : "Level 3",
+  "level" : [
+    [ {"tile": "quarterCircle", "rotation": 270}, {"tile": "semiCircle", "rotation": 180}, {"tile": "pegCircle", "rotation": 180}],
+    
+    [{"tile": "semiCircle", "rotation": 90}, {"tile": "fullCircle", "rotation": [0, 180]}, {"tile": "pegCircle", "rotation": 180}],
+    
+    [{"tile": "quarterCircle", "rotation": 180}, {"tile": "semiCircle", "rotation": 0}, {"tile": "pegCircle", "rotation": 180}] ]
+}

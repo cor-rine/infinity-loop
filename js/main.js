@@ -39,24 +39,28 @@ var LevelBuilder = {
   
   //   Takes in a board object and creates a board.
   init: function(selector, level) {
-    var _this = this;
+    var self = this;
     
     // Instanciate board
-    _this.board = new Board(selector, level.length, level[0].length);
+    self.board = new Board(selector, level.length, level[0].length);
     
     // Iterate over the level and create the board in the DOM
     for (var i = 0; i < level.length; i++) {
       for (var j = 0; j < level[i].length; j++) {
 
-        // Set the board up with a random rotation of the tile
-        _this.board.setTile(i, j, new Tile(level[i][j].tile, TileTypes[level[i][j].tile], Math.ceil(Math.random()*4)*90));
+        // Set the board up with a random rotation of the tile if not in debug mode
+        if (self.debug) {
+          self.board.setTile(i, j, new Tile(level[i][j].tile, TileTypes[level[i][j].tile], level[i][j].rotation));
+        } else {
+          self.board.setTile(i, j, new Tile(level[i][j].tile, TileTypes[level[i][j].tile], Math.ceil(Math.random()*4)*90));
+        }
 
         // Set the solution
-        _this.board.setSolutionTile(i, j, level[i][j].rotation);
+        self.board.setSolutionTile(i, j, level[i][j].rotation);
       }
     }
 
-    _this.board.renderBoard();
+    self.board.renderBoard();
   }
 };
 
@@ -126,20 +130,20 @@ Board.prototype = {
    * Renders the board
    */
   renderBoard: function() {
-    var _this = this;
+    var self = this;
 
-    var board = document.querySelector(_this.el);
+    var board = document.querySelector(self.el);
 
-    for (var i = 0; i < _this.tiles.length; i++) {
-      for (var j = 0; j < _this.tiles[i].length; j++) {
-        var tile = _this.getTile(i, j).renderSVGTile(board);
+    for (var i = 0; i < self.tiles.length; i++) {
+      for (var j = 0; j < self.tiles[i].length; j++) {
+        var tile = self.getTile(i, j).renderSVGTile(board);
       }
     }
     
-    board.style.width = CSSValues.tileWidth * _this.tiles.length + 'px';
+    board.style.width = CSSValues.tileWidth * self.tiles.length + 'px';
 
     board.addEventListener('click', function() {
-      if (_this.isWinningMove()) {
+      if (self.isWinningMove()) {
         console.log('winner');
         board.className += ' complete';
       };
@@ -151,24 +155,24 @@ Board.prototype = {
    * Check to see if we have a winner
    */
   isWinningMove: function() {
-    var _this = this;
+    var self = this;
 
     // Iterate through the tiles and match against the solution
-    for (var i = 0; i < _this.tiles.length; i++) {
-      for (var j = 0; j < _this.tiles[i].length; j++) {
-        var tile = _this.getTile(i, j);
+    for (var i = 0; i < self.tiles.length; i++) {
+      for (var j = 0; j < self.tiles[i].length; j++) {
+        var tile = self.getTile(i, j);
 
-        console.log('Solution: ' + _this.solution[i][j]);
+        console.log('Solution: ' + self.solution[i][j]);
         console.log('Tile: ' + tile.rotation%360);
 
-        if (typeof _this.solution[i][j] === 'object') {
-          if (_this.solution[i][j][0] !== tile.rotation%360 ||
-              _this.solution[i][j][1] !== tile.rotation%360) {
+        if (typeof self.solution[i][j] === 'object') {
+          if (self.solution[i][j][0] !== tile.rotation%360 ||
+              self.solution[i][j][1] !== tile.rotation%360) {
             continue;
           }
         }
 
-        else if (_this.solution[i][j] !== tile.rotation%360) {
+        else if (self.solution[i][j] !== tile.rotation%360) {
           return false;
         }
 
@@ -200,31 +204,31 @@ Tile.prototype = {
    * Renders the tile on the board and sets event listener
    */
   renderTile: function(board) {
-    var _this = this;
+    var self = this;
 
-    _this.el = document.createElement('div');
-    _this.el.className = _this.type.classNames;
+    self.el = document.createElement('div');
+    self.el.className = self.type.classNames;
 
     // Give the child node for the full circle
-    if (_this.name === 'fullCircle') {
-      _this.el.innerHTML = _this.type.childNodeTemplate;
+    if (self.name === 'fullCircle') {
+      self.el.innerHTML = self.type.childNodeTemplate;
     }
 
     // Set the rotation of the tiles
-    _this.el.setAttribute('data-rotation', _this.rotation);
-    _this.el.style.transform = 'rotate(' + _this.rotation + 'deg)';
+    self.el.setAttribute('data-rotation', self.rotation);
+    self.el.style.transform = 'rotate(' + self.rotation + 'deg)';
 
     // Initialize callback listener
-    _this.el.addEventListener('click', function() {
+    self.el.addEventListener('click', function() {
 
-      _this.rotation += 90;
+      self.rotation += 90;
 
       // Update the view
-      _this.rotateTile(this, _this.rotation);
+      self.rotateTile(this, self.rotation);
 
     });
     
-    board.appendChild(_this.el);
+    board.appendChild(self.el);
     
   },
 
@@ -232,29 +236,29 @@ Tile.prototype = {
    * Renders the tile on the board and sets event listener
    */
   renderSVGTile: function(board) {
-    var _this = this;
+    var self = this;
 
-    _this.el = document.createElement('div');
-    _this.el.className = 'tile js-tile';
+    self.el = document.createElement('div');
+    self.el.className = 'tile js-tile';
 
     // Give the child node for the full circle
-    _this.el.innerHTML = _this.type.svgTemplate;
+    self.el.innerHTML = self.type.svgTemplate;
 
     // Set the rotation of the tiles
-    _this.el.setAttribute('data-rotation', _this.rotation);
-    _this.el.style.transform = 'rotate(' + _this.rotation + 'deg)';
+    self.el.setAttribute('data-rotation', self.rotation);
+    self.el.style.transform = 'rotate(' + self.rotation + 'deg)';
 
     // Initialize callback listener
-    _this.el.addEventListener('click', function() {
+    self.el.addEventListener('click', function() {
 
-      _this.rotation += 90;
+      self.rotation += 90;
 
       // Update the view
-      _this.rotateTile(this, _this.rotation);
+      self.rotateTile(this, self.rotation);
 
     });
     
-    board.appendChild(_this.el);
+    board.appendChild(self.el);
     
   },
 
@@ -305,7 +309,12 @@ getJSON = function(url, callback) {
  */
 window.onload = function() {
 
-  getJSON(document.location + 'js/levels/2.json', function(data) {
+  // Set debug mode for level building
+  if (document.location.search.substring(1) === 'debug=true') {
+    LevelBuilder.debug = true;
+  }
+
+  getJSON('//' + document.location.host + '/js/levels/4.json', function(data) {
     LevelBuilder.init('.js-board', data.level);
   });
 
