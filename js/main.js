@@ -148,7 +148,11 @@ Board.prototype = {
 
     board.addEventListener('click', function() {
       if (self.isWinningMove()) {
-        console.log('winner');
+
+        if (self.debug) {
+          console.log('winner');
+        }
+
         board.className += ' complete';
       };
     });
@@ -166,8 +170,10 @@ Board.prototype = {
       for (var j = 0; j < self.tiles[i].length; j++) {
         var tile = self.getTile(i, j);
 
-        console.log('Solution: ' + self.solution[i][j]);
-        console.log('Tile: ' + tile.rotation%360);
+        if (self.debug) {
+          console.log('Solution: ' + self.solution[i][j]);
+          console.log('Tile: ' + tile.rotation%360);
+        }
 
         if (typeof self.solution[i][j] === 'object') {
           if (self.solution[i][j][0] !== tile.rotation%360 ||
@@ -339,7 +345,7 @@ window.onload = function() {
 
     if (queryParams['level']) {
 
-      var level = parseInt(queryParams['level']);
+      var level = queryParams['level'];
 
       getJSON('//' + document.location.host + '/js/levels/' + level + '.json', function(data) {
         LevelBuilder.init('.js-board', data.level);
@@ -351,7 +357,7 @@ window.onload = function() {
   // Game Mode
   // Not finished yet ...
   if (!queryParams['level']) {
-    getJSON('//' + document.location.host + '/js/levels/1.json', function(data) {
+    getJSON('//' + document.location.host + '/js/levels/001.json', function(data) {
       LevelBuilder.init('.js-board', data.level);
     });
   }
