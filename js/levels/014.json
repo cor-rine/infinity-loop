@@ -1,6 +1,6 @@
 {
-  "name" : "Level 10",
-  "display": "#10",
+  "name" : "Level 14",
+  "display": "#14",
   "level" : [
     [ {"tile": "blank", "rotation": 90}, {"tile": "pegCircle", "rotation": 0}, {"tile": "straightLine", "rotation": 180}, {"tile": "quarterCircle", "rotation": 0}],
     

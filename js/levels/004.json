@@ -1,5 +1,6 @@
 {
   "name" : "Level 4",
+  "display": "#4",
   "level" : [
     [ {"tile": "quarterCircle", "rotation": 270}, {"tile": "quarterCircle", "rotation": 0}, {"tile": "blank", "rotation": 0}],
     

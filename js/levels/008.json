@@ -1,5 +1,6 @@
 {
   "name" : "Level 8",
+  "display": "#8",
   "level" : [
     [ {"tile": "pegCircle", "rotation": 0}, {"tile": "semiCircle", "rotation": 180}, {"tile": "semiCircle", "rotation": 180}, {"tile": "pegCircle", "rotation": 180}],
     

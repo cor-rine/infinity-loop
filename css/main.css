@@ -7,12 +7,11 @@ body {
   margin: 0 auto;
   padding: 30px;
   width: 420px;
-  transition: fill 1s ease-in-out;
 }
 
 .board svg {
   fill: #000;
-  transition: all 1s ease-in-out;
+  transition: all 2s ease-in-out;
   -webkit-filter: drop-shadow(0 0 0 #000);
   -moz-filter: drop-shadow(0 0 0 #000);
   -ms-filter: drop-shadow(0 0 0 #000);
@@ -28,26 +27,6 @@ body {
   filter: drop-shadow(0 0 4px #cc0000);
 }
 
-.board .box:after,
-.board .box:before {
-  transition: all 1s ease-in-out;
-}
-
-.board.complete .box:after,
-.board.complete .box:before {
-  background-color: #333;
-  box-shadow: 0px 0px 4px 2px #333, inset 0px 0px 4px 2px #333;
-}
-.board.complete .straight-line:after,
-.board.complete .peg-circle:after {
-  background-color: #333;
-  box-shadow: 0px 0px 4px 2px #333;
-}
-.board.complete .peg-circle:before {
-  border-color: #333;
-  box-shadow: 0px 0px 4px 2px #333, inset 0px 0px 4px 2px #333;
-}
-
 .tile {
   display: inline-block;
   height: 72px;
@@ -57,4 +36,9 @@ body {
   position: relative;
   transition: 0.5s transform ease;
   width: 72px;
+}
+
+.level {
+  font-family: 'Helvetica Nueue', Arial, sans-serif;
+  text-align: center;
 }

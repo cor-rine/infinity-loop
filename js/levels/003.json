@@ -1,5 +1,6 @@
 {
   "name" : "Level 3",
+  "display": "#3",
   "level" : [
     [ {"tile": "quarterCircle", "rotation": 270}, {"tile": "semiCircle", "rotation": 180}, {"tile": "pegCircle", "rotation": 180}],
     

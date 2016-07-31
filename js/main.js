@@ -5,6 +5,11 @@ var CSSValues = {
   tileWidth: 72
 }
 
+
+var SoundFX = {
+  gameComplete: '.js-soundfx-complete'
+}
+
 /**
  * Tile Types and templates
  */
@@ -42,25 +47,26 @@ var LevelBuilder = {
   board: null,
   
   //   Takes in a board object and creates a board.
-  init: function(selector, level) {
+  init: function(boardSelector, levelSelector, levelInfo) {
     var self = this;
     
     // Instanciate board
-    self.board = new Board(selector, level.length, level[0].length);
+    self.board = new Board(boardSelector, levelSelector, levelInfo.level.length, levelInfo.level[0].length);
+    self.board.setTitle(levelInfo.display);
     
     // Iterate over the level and create the board in the DOM
-    for (var i = 0; i < level.length; i++) {
-      for (var j = 0; j < level[i].length; j++) {
+    for (var i = 0; i < levelInfo.level.length; i++) {
+      for (var j = 0; j < levelInfo.level[i].length; j++) {
 
         // Set the board up with a random rotation of the tile if not in debug mode
         if (self.debug) {
-          self.board.setTile(i, j, new Tile(level[i][j].tile, TileTypes[level[i][j].tile], level[i][j].rotation));
+          self.board.setTile(i, j, new Tile(levelInfo.level[i][j].tile, TileTypes[levelInfo.level[i][j].tile], levelInfo.level[i][j].rotation));
         } else {
-          self.board.setTile(i, j, new Tile(level[i][j].tile, TileTypes[level[i][j].tile], Math.ceil(Math.random()*4)*90));
+          self.board.setTile(i, j, new Tile(levelInfo.level[i][j].tile, TileTypes[levelInfo.level[i][j].tile], Math.ceil(Math.random()*4)*90));
         }
 
         // Set the solution
-        self.board.setSolutionTile(i, j, level[i][j].rotation);
+        self.board.setSolutionTile(i, j, levelInfo.level[i][j].rotation);
       }
     }
 
@@ -75,10 +81,11 @@ var LevelBuilder = {
  * @param {int} width of the board in squares
  * @param {int} height of the board in squares
  */
-function Board(selector, width, height) {
+function Board(selector, levelSelector, width, height) {
   this.el = selector;
   this.width = width;
   this.height = height;
+  this.levelEl = levelSelector;
 
   this.generateBoardMap();
 }
@@ -122,6 +129,14 @@ Board.prototype = {
   },
 
   /**
+   * Initialise the DOM for the obstacle.
+   * @param {string} title of the level
+   */
+  setTitle: function(title) {
+    this.title = title;
+  },
+
+  /**
    * Returns the tile at the given location
    * @param {number} xVal
    * @param {number} yVal
@@ -137,12 +152,15 @@ Board.prototype = {
     var self = this;
 
     var board = document.querySelector(self.el);
+    var levelDisplay = document.querySelector(self.levelEl);
 
     for (var i = 0; i < self.tiles.length; i++) {
       for (var j = 0; j < self.tiles[i].length; j++) {
         var tile = self.getTile(i, j).renderSVGTile(board);
       }
     }
+
+    levelDisplay.innerHTML = self.title;
     
     board.style.width = CSSValues.tileWidth * self.tiles[0].length + 'px';
 
@@ -154,6 +172,9 @@ Board.prototype = {
         }
 
         board.className += ' complete';
+        setTimeout(function playSound() {
+          document.querySelector(SoundFX.gameComplete).play();
+        }, 600);
       };
     });
 
@@ -229,12 +250,14 @@ Tile.prototype = {
     self.el.style.transform = 'rotate(' + self.rotation + 'deg)';
 
     // Initialize callback listener
-    self.el.addEventListener('click', function() {
+    self.el.addEventListener('click', function(event) {
 
-      self.rotation += 90;
+      if (event.isTrusted) {
+        self.rotation += 90;
 
-      // Update the view
-      self.rotateTile(this, self.rotation);
+        // Update the view
+        self.rotateTile(this, self.rotation);
+      }
 
     });
     
@@ -259,12 +282,14 @@ Tile.prototype = {
     self.el.style.transform = 'rotate(' + self.rotation + 'deg)';
 
     // Initialize callback listener
-    self.el.addEventListener('click', function() {
+    self.el.addEventListener('click', function(event) {
 
-      self.rotation += 90;
+      if (event.isTrusted) {
+        self.rotation += 90;
 
-      // Update the view
-      self.rotateTile(this, self.rotation);
+        // Update the view
+        self.rotateTile(this, self.rotation);
+      }    
 
     });
     
@@ -348,7 +373,7 @@ window.onload = function() {
       var level = queryParams['level'];
 
       getJSON('//' + document.location.host + '/js/levels/' + level + '.json', function(data) {
-        LevelBuilder.init('.js-board', data.level);
+        LevelBuilder.init('.js-board', '.js-level', data);
       });
 
     }
@@ -358,7 +383,7 @@ window.onload = function() {
   // Not finished yet ...
   if (!queryParams['level']) {
     getJSON('//' + document.location.host + '/js/levels/001.json', function(data) {
-      LevelBuilder.init('.js-board', data.level);
+      LevelBuilder.init('.js-board','.js-level', data);
     });
   }
 
