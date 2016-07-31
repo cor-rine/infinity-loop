@@ -9,7 +9,7 @@ body {
 
 .board svg {
   fill: #000;
-  transition: all 2s cubic-bezier(0.16, 0.88, 0.77, 1.14);
+  transition: all 2.3s cubic-bezier(0.16, 0.88, 0.63, 1.51);
   -webkit-filter: drop-shadow(0 0 0 #000);
   filter: drop-shadow(0 0 0 #000); }
 
@@ -20,7 +20,7 @@ body {
 .tile {
   display: inline-block;
   height: 72px;
-  margin: -2px;
+  margin: 0 0 -6px 0;
   padding: 0;
   overflow: hidden;
   position: relative;
