@@ -1,6 +1,8 @@
 {
   "name" : "Level 1",
   "display": "#1",
+  "forgroundColor" : "indigoBlue",
+  "backgroundColor" : "lightBlue",
   "level" : [
     [ {"tile": "pegCircle", "rotation": 0}, {"tile": "pegCircle", "rotation": 180}],
     

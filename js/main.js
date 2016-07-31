@@ -171,10 +171,10 @@ Board.prototype = {
           console.log('winner');
         }
 
-        board.className += ' complete';
+        document.querySelector('body').className = 'complete';
         setTimeout(function playSound() {
           document.querySelector(SoundFX.gameComplete).play();
-        }, 600);
+        }, 300);
       };
     });
 

@@ -1,0 +1,40 @@
+
+
+
+body {
+  background: #222;
+}
+
+.board {
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 30px;
+  width: 420px;
+}
+
+.board svg {
+  fill: #000;
+  transition: all 2s cubic-bezier(.16,.88,.77,1.14);
+  filter: drop-shadow(0 0 0 #000);
+}
+
+.complete .board svg {
+  filter: drop-shadow(0 0 4px #cc0000);
+}
+
+.tile {
+  display: inline-block;
+  height: 72px;
+  margin: -2px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  transition: 0.5s transform ease;
+  width: 72px;
+}
+
+.level {
+  font-family: 'Helvetica Nueue', Arial, sans-serif;
+  text-align: center;
+  user-select: none;
+}
