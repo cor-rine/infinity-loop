@@ -92,7 +92,7 @@
      * @param {string} value of the level to load
      */
     loadLevel: function(levelNum) {
-      getJSON('//' + document.location.host + '/js/levels/' + levelNum + '.json', function(data) {
+      getJSON(document.location.href + 'js/levels/' + levelNum + '.json', function(data) {
         LevelBuilder.init('.js-board', '.js-level', data);
       });
     }
