@@ -40,6 +40,18 @@ var TileTypes = {
   },
 };
 
+function Game() {
+
+}
+
+Game.prototype = {
+  currentLevel: '001',
+
+  start: function() {
+
+  }
+}
+
 /**
  * Level Builder to create the levels and control what happens on the board
  */
@@ -71,6 +83,16 @@ var LevelBuilder = {
     }
 
     self.board.renderBoard();
+  },
+
+  /**
+   * Load the level
+   * @param {string} value of the level to load
+   */
+  loadLevel: function(levelNum) {
+    getJSON('//' + document.location.host + '/js/levels/' + levelNum + '.json', function(data) {
+      LevelBuilder.init('.js-board', '.js-level', data);
+    });
   }
 };
 
@@ -369,22 +391,14 @@ window.onload = function() {
     LevelBuilder.debug = true;
 
     if (queryParams['level']) {
-
-      var level = queryParams['level'];
-
-      getJSON('//' + document.location.host + '/js/levels/' + level + '.json', function(data) {
-        LevelBuilder.init('.js-board', '.js-level', data);
-      });
-
+      LevelBuilder.loadLevel(queryParams['level']);
     }
   }
 
   // Game Mode
   // Not finished yet ...
   if (!queryParams['level']) {
-    getJSON('//' + document.location.host + '/js/levels/001.json', function(data) {
-      LevelBuilder.init('.js-board','.js-level', data);
-    });
+    LevelBuilder.loadLevel('001');
   }
 
 };
