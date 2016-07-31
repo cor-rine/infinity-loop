@@ -22,6 +22,7 @@ gulp.task('sass', function() {
 // jshint Task
 gulp.task('lint', function() {
   return gulp.src('./js/**/*.js')
+        .pipe(jshint())
         .pipe(jshint.reporter(stylish));
 });
 
@@ -35,6 +36,7 @@ gulp.task('serve', function() {
   });
   gulp.watch('**/*.*', browserSync.reload);
   gulp.watch('./scss/*.scss', ['sass']);
+  gulp.watch('./js/**/*.js', ['lint']);
 });
 
 gulp.task('dev', ['sass', 'lint', 'serve']);
