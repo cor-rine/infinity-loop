@@ -32,7 +32,8 @@ gulp.task('serve', function() {
   browserSync.init({
     server: {
       baseDir: './'
-    }
+    },
+    port: 3333
   });
   gulp.watch('**/*.*', browserSync.reload);
   gulp.watch('./scss/*.scss', ['sass']);

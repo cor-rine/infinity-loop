@@ -16,6 +16,12 @@ body {
   filter: drop-shadow(0 0 0 #000);
 }
 
+.game-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .complete .board svg {
   filter: drop-shadow(0 0 4px #cc0000);
 }
@@ -33,6 +39,8 @@ body {
 
 .level {
   font-family: 'Helvetica Nueue', Arial, sans-serif;
+  font-size: 25px;
+  font-weight: 200;
   text-align: center;
   user-select: none;
 }

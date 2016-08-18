@@ -1,5 +1,5 @@
-(function() {
-  "use strict";
+(function(document, window) {
+  'use strict';
 
   /**
    * CSS Settings that need to come into the JS
@@ -17,42 +17,56 @@
    */
   var TileTypes = {
     straightLine: {
-      classNames: 'tile straight-line js-tile',
-      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="72px" height="72px" viewBox="0 -27 72 72" overflow="visible" enable-background="new 0 -27 72 72" xml:space="preserve"> <defs></defs><rect width="72" height="18"/></svg>'
+      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="72px" height="72px" viewBox="0 -27 72 72" overflow="visible" enable-background="new 0 -27 72 72" xml:space="preserve"> <defs></defs><rect width="72" height="18"/></svg>',
+      svgTag: '<embed src="svg/straight-line.svg" type="image/svg+xml"></embed>'
     },
     semiCircle: {
-      classNames: 'tile semi-circle js-tile',
-      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 0 72 72" overflow="visible" enable-background="new 0 0 72 72" xml:space="preserve"><defs></defs><path d="M45,0c0,0-9,0-18,0C27,27,0,27,0,27v18c0,0,23.101-0.003,36.2-16.557C42.616,37.397,53.506,45,72,45c0,0,0-9,0-18 C45,27,45,0,45,0z"/></svg>'
+      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 0 72 72" overflow="visible" enable-background="new 0 0 72 72" xml:space="preserve"><defs></defs><path d="M45,0c0,0-9,0-18,0C27,27,0,27,0,27v18c0,0,23.101-0.003,36.2-16.557C42.616,37.397,53.506,45,72,45c0,0,0-9,0-18 C45,27,45,0,45,0z"/></svg>',
+      svgTag: '<embed src="svg/semi-circle.svg" type="image/svg+xml"></embed>'
     },
     quarterCircle: {
-      classNames: 'tile quarter-circle js-tile',
-      svgTemplate: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 -27 72 72" overflow="visible" enable-background="new 0 -27 72 72" xml:space="preserve"> <defs> </defs> <path d="M0,0c45,0,45,45,45,45H27c0,0,0-27-27-27C0,9,0,0,0,0z"/> </svg>'
+      svgTemplate: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 -27 72 72" overflow="visible" enable-background="new 0 -27 72 72" xml:space="preserve"> <defs> </defs> <path d="M0,0c45,0,45,45,45,45H27c0,0,0-27-27-27C0,9,0,0,0,0z"/> </svg>',
+      svgTag: '<embed src="svg/quarter-circle.svg" type="image/svg+xml"></embed>'
     },
     fullCircle: {
-      classNames: 'tile full-circle js-tile',
-      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 0 72 72" overflow="visible" enable-background="new 0 0 72 72"   xml:space="preserve"><defs></defs><path fill="none" d="M36.2,28.443c-2.331,2.946-4.978,5.366-7.756,7.357c2.946,2.331,5.366,4.978,7.357,7.756  c2.331-2.945,4.978-5.366,7.756-7.357C40.611,33.869,38.19,31.222,36.2,28.443z"/><path d="M45,0c0,0-9,0-18,0C27,27,0,27,0,27v18c27,0,27,27,27,27s9,0,18,0c0-27,27-27,27-27s0-9,0-18C45,27,45,0,45,0z M35.8,43.557  c-1.991-2.778-4.411-5.426-7.357-7.756c2.778-1.991,5.425-4.411,7.756-7.357c1.991,2.778,4.412,5.425,7.357,7.756  C40.778,38.19,38.131,40.611,35.8,43.557z"/></svg>'
+      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="0 0 72 72" overflow="visible" enable-background="new 0 0 72 72"   xml:space="preserve"><defs></defs><path fill="none" d="M36.2,28.443c-2.331,2.946-4.978,5.366-7.756,7.357c2.946,2.331,5.366,4.978,7.357,7.756  c2.331-2.945,4.978-5.366,7.756-7.357C40.611,33.869,38.19,31.222,36.2,28.443z"/><path d="M45,0c0,0-9,0-18,0C27,27,0,27,0,27v18c27,0,27,27,27,27s9,0,18,0c0-27,27-27,27-27s0-9,0-18C45,27,45,0,45,0z M35.8,43.557  c-1.991-2.778-4.411-5.426-7.357-7.756c2.778-1.991,5.425-4.411,7.756-7.357c1.991,2.778,4.412,5.425,7.357,7.756  C40.778,38.19,38.131,40.611,35.8,43.557z"/></svg>',
+      svgTag: '<embed src="svg/full-circle.svg" type="image/svg+xml"></embed>'
     },
     pegCircle: {
-      classNames: 'tile peg-circle js-tile',
-      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="-13.25 -13.25 72 72"    overflow="visible" enable-background="new -13.25 -13.25 72 72" xml:space="preserve"> <defs> </defs><circle fill="none" cx="22.5" cy="22.5" r="9"/> <path d="M58.75,13.75H43.234C39.821,5.67,31.822,0,22.5,0C10.074,0,0,10.074,0,22.5C0,34.926,10.074,45,22.5,45  c9.128,0,16.98-5.439,20.51-13.25h15.74V13.75z M22.5,31.5c-4.971,0-9-4.029-9-9s4.029-9,9-9s9,4.029,9,9S27.471,31.5,22.5,31.5z"/></svg>'
+      svgTemplate: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="72px" height="72px" viewBox="-13.25 -13.25 72 72"    overflow="visible" enable-background="new -13.25 -13.25 72 72" xml:space="preserve"> <defs> </defs><circle fill="none" cx="22.5" cy="22.5" r="9"/> <path d="M58.75,13.75H43.234C39.821,5.67,31.822,0,22.5,0C10.074,0,0,10.074,0,22.5C0,34.926,10.074,45,22.5,45  c9.128,0,16.98-5.439,20.51-13.25h15.74V13.75z M22.5,31.5c-4.971,0-9-4.029-9-9s4.029-9,9-9s9,4.029,9,9S27.471,31.5,22.5,31.5z"/></svg>',
+      svgTag: '<embed src="svg/peg-circle.svg" type="image/svg+xml"></embed>'
     },
     blank: {
-      classNames: 'tile straight-line js-tile',
-      svgTemplate: ''
+      svgTemplate: '',
+      svgTag: ''
     },
   };
 
   function Game() {
-
   }
 
   Game.prototype = {
     currentLevel: '001',
 
     start: function() {
+      LevelBuilder.resetBoard();
+      LevelBuilder.loadLevel(this.currentLevel);
+    },
 
+    nextLevel: function() {
+      var self = this;
+
+      var level = parseInt(self.currentLevel);
+      level++;
+      self.currentLevel = pad(level, 3);
+
+      setTimeout(function startNextLevel() {
+        self.start();
+      }, 3500);
     }
   };
+
+  var game = new Game();
 
   /**
    * Level Builder to create the levels and control what happens on the board
@@ -88,6 +102,17 @@
     },
 
     /**
+     * Reset the board
+     */
+    resetBoard: function() {
+      document.querySelector('body').classList.remove('complete');
+      if (this.board) {
+
+        this.board.clear();
+      }
+    },
+
+    /**
      * Load the level
      * @param {string} value of the level to load
      */
@@ -97,7 +122,6 @@
       });
     }
   };
-
 
   /**
    * Initialise the Board for the obstacle.
@@ -116,6 +140,7 @@
 
   Board.prototype = {
     tiles: [],
+    solution: [],
 
     /**
      * Helper method to create tiles for the game board
@@ -130,6 +155,36 @@
           this.solution[i] = Array(this.height);
         }
       }
+    },
+
+    // TODO: make this work.
+    // checkBoardWinner: function() {
+    //   console.log('running check board winner');
+    //   if (this.isWinningMove()) {
+
+    //     if (this.debug) {
+    //       console.log('winner');
+    //     }
+
+    //     document.querySelector('body').classList.add('complete');
+    //     setTimeout(function playSound() {
+    //       document.querySelector(SoundFX.gameComplete).play();
+    //     }, 300);
+    //     game.nextLevel();
+    //   }
+    // },
+
+    /**
+     * Helper method to clear the tiles
+     **/
+    clear: function() {
+      this.tiles = [];
+      this.solution = [];
+      
+      var board = document.querySelector(this.el);
+
+      // TODO: make this work.
+      // board.removeEventListener('click', );
     },
 
     /**
@@ -178,6 +233,10 @@
       var board = document.querySelector(self.el);
       var levelDisplay = document.querySelector(self.levelEl);
 
+      // Clear board and reset classname
+      board.innerHTML = '';
+      document.querySelector('body').className = '';
+
       for (var i = 0; i < self.tiles.length; i++) {
         for (var j = 0; j < self.tiles[i].length; j++) {
           self.getTile(i, j).renderSVGTile(board);
@@ -188,17 +247,18 @@
       
       board.style.width = CSSValues.tileWidth * self.tiles[0].length + 'px';
 
+      // TODO: make this actually work with a function reference
       board.addEventListener('click', function() {
         if (self.isWinningMove()) {
-
           if (self.debug) {
             console.log('winner');
           }
 
-          document.querySelector('body').className = 'complete';
+          document.querySelector('body').classList.add('complete');
           setTimeout(function playSound() {
             document.querySelector(SoundFX.gameComplete).play();
           }, 300);
+          game.nextLevel();
         }
       });
 
@@ -209,6 +269,10 @@
      */
     isWinningMove: function() {
       var self = this;
+
+      if (self.tiles.length === 0 && self.solution.length === 0) {
+        return false;
+      }
 
       // Iterate through the tiles and match against the solution
       for (var i = 0; i < self.tiles.length; i++) {
@@ -258,40 +322,6 @@
     /**
      * Renders the tile on the board and sets event listener
      */
-    renderTile: function(board) {
-      var self = this;
-
-      self.el = document.createElement('div');
-      self.el.className = self.type.classNames;
-
-      // Give the child node for the full circle
-      if (self.name === 'fullCircle') {
-        self.el.innerHTML = self.type.childNodeTemplate;
-      }
-
-      // Set the rotation of the tiles
-      self.el.setAttribute('data-rotation', self.rotation);
-      self.el.style.transform = 'rotate(' + self.rotation + 'deg)';
-
-      // Initialize callback listener
-      self.el.addEventListener('click', function(event) {
-
-        if (event.isTrusted) {
-          self.rotation += 90;
-
-          // Update the view
-          self.rotateTile(this, self.rotation);
-        }
-
-      });
-      
-      board.appendChild(self.el);
-      
-    },
-
-    /**
-     * Renders the tile on the board and sets event listener
-     */
     renderSVGTile: function(board) {
       var self = this;
 
@@ -325,11 +355,8 @@
      * Rotates the tile
      */
     rotateTile: function(obj, angle) {
-
       obj.setAttribute('data-rotation', angle);
-
       obj.style.transform = 'rotate(' + angle + 'deg)';
-
     }
   };
 
@@ -378,15 +405,22 @@
       return objURL;
     };
 
+  // Function to pad string to give it leading zeros
+  function pad (str, max) {
+    str = str.toString();
+    return str.length < max ? pad("0" + str, max) : str;
+  }
 
   /**
    * Onload start the game and build the level
    * Need to build a level around this to keep score maybeee ... we'll see.
    */
   window.onload = function() {
-
     // Set debug mode for level building
     var queryParams = getQueryParams();
+    var windowHeight = window.innerHeight;
+
+    document.getElementById('body').style.height = windowHeight + "px";
 
     // Debug Mode
     if (queryParams.debug) {
@@ -400,9 +434,8 @@
     // Game Mode
     // Not finished yet ...
     if (!queryParams.level) {
-      LevelBuilder.loadLevel('001');
+      game.start();
     }
 
   };
-
 })(document, window);
