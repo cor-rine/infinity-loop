@@ -307,8 +307,7 @@
     },
 
     clickFunction: function() {
-      console.log(this);
-
+      
       if (LevelBuilder.board.isWinningMove()) {
         if (self.debug) {
           console.log('winner');
