@@ -309,7 +309,7 @@
     clickFunction: function() {
       console.log(this);
 
-      if (self.isWinningMove()) {
+      if (LevelBuilder.board.isWinningMove()) {
         if (self.debug) {
           console.log('winner');
         }
