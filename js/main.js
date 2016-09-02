@@ -248,7 +248,11 @@
       board.style.width = CSSValues.tileWidth * self.tiles[0].length + 'px';
 
       // TODO: make this actually work with a function reference
+      // board.addEventListener('click', self.clickFunction);
+
       board.addEventListener('click', function() {
+        console.log(self);
+
         if (self.isWinningMove()) {
           if (self.debug) {
             console.log('winner');
@@ -300,7 +304,23 @@
 
       return true;
 
-    }
+    },
+
+    clickFunction: function() {
+      console.log(this);
+
+      if (self.isWinningMove()) {
+        if (self.debug) {
+          console.log('winner');
+        }
+
+        document.querySelector('body').classList.add('complete');
+        setTimeout(function playSound() {
+          document.querySelector(SoundFX.gameComplete).play();
+        }, 300);
+        game.nextLevel();
+      }
+    },
 
   };
 
