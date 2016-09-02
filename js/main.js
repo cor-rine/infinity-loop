@@ -248,19 +248,23 @@
       board.style.width = CSSValues.tileWidth * self.tiles[0].length + 'px';
 
       // TODO: make this actually work with a function reference
-      board.addEventListener('click', function() {
-        if (self.isWinningMove()) {
-          if (self.debug) {
-            console.log('winner');
-          }
+      board.addEventListener('click', self.clickFunction);
 
-          document.querySelector('body').classList.add('complete');
-          setTimeout(function playSound() {
-            document.querySelector(SoundFX.gameComplete).play();
-          }, 300);
-          game.nextLevel();
-        }
-      });
+      // board.addEventListener('click', function() {
+      //   console.log(self);
+
+      //   if (self.isWinningMove()) {
+      //     if (self.debug) {
+      //       console.log('winner');
+      //     }
+
+      //     document.querySelector('body').classList.add('complete');
+      //     setTimeout(function playSound() {
+      //       document.querySelector(SoundFX.gameComplete).play();
+      //     }, 300);
+      //     game.nextLevel();
+      //   }
+      // });
 
     },
 
@@ -300,7 +304,22 @@
 
       return true;
 
-    }
+    },
+
+    clickFunction: function() {
+      
+      if (LevelBuilder.board.isWinningMove()) {
+        if (self.debug) {
+          console.log('winner');
+        }
+
+        document.querySelector('body').classList.add('complete');
+        setTimeout(function playSound() {
+          document.querySelector(SoundFX.gameComplete).play();
+        }, 300);
+        game.nextLevel();
+      }
+    },
 
   };
 
