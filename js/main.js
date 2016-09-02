@@ -117,7 +117,7 @@
      * @param {string} value of the level to load
      */
     loadLevel: function(levelNum) {
-      getJSON(document.location.href + 'js/levels/' + levelNum + '.json', function(data) {
+      getJSON(document.location.origin + document.location.pathname + 'js/levels/' + levelNum + '.json', function(data) {
         LevelBuilder.init('.js-board', '.js-level', data);
       });
     }
@@ -248,23 +248,23 @@
       board.style.width = CSSValues.tileWidth * self.tiles[0].length + 'px';
 
       // TODO: make this actually work with a function reference
-      // board.addEventListener('click', self.clickFunction);
+      board.addEventListener('click', self.clickFunction);
 
-      board.addEventListener('click', function() {
-        console.log(self);
+      // board.addEventListener('click', function() {
+      //   console.log(self);
 
-        if (self.isWinningMove()) {
-          if (self.debug) {
-            console.log('winner');
-          }
+      //   if (self.isWinningMove()) {
+      //     if (self.debug) {
+      //       console.log('winner');
+      //     }
 
-          document.querySelector('body').classList.add('complete');
-          setTimeout(function playSound() {
-            document.querySelector(SoundFX.gameComplete).play();
-          }, 300);
-          game.nextLevel();
-        }
-      });
+      //     document.querySelector('body').classList.add('complete');
+      //     setTimeout(function playSound() {
+      //       document.querySelector(SoundFX.gameComplete).play();
+      //     }, 300);
+      //     game.nextLevel();
+      //   }
+      // });
 
     },
 
